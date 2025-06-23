@@ -12,6 +12,7 @@ ion-content {
 .main-header {
   display: flex;
   padding-top: 30px;
+  justify-content:space-between;
 }
 
 .header-name {
@@ -237,4 +238,12 @@ swiper-container {
 
 .slider-swip {
   min-width: 75px;
+}
+
+.ios .tellimg {
+    padding-left: 23px !important;
+}
+
+.is-ios .tellimg img {
+    display: block;
 }

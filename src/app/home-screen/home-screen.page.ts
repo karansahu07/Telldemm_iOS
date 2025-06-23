@@ -645,6 +645,7 @@ import { FormsModule } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { ApiService } from '../services/api/api.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-screen',
@@ -658,8 +659,9 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private popoverCtrl: PopoverController,
-    private service: ApiService
-  ) {}
+    private service: ApiService,
+    private platform: Platform
+  ) { }
 
   searchText: string = '';
   selectedFilter: string = 'all';
@@ -672,7 +674,12 @@ export class HomeScreenPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.fetchAllUsers();
-     this.getAllUsers();
+    this.getAllUsers();
+
+    if (this.platform.is('ios')) {
+      document.body.classList.add('is-ios');
+    }
+
   }
 
   ngOnDestroy(): void {
@@ -720,35 +727,35 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   //   this.chatList = allUsers.filter(u => u.phone_number !== currentUser);
   // }
 
- getAllUsers() {
-  const currentUserPhone = localStorage.getItem('phone_number'); // e.g. "+919138152160"
+  getAllUsers() {
+    const currentUserPhone = localStorage.getItem('phone_number'); // e.g. "+919138152160"
 
-  this.service.getAllUsers().subscribe((users: any[]) => {
-    users.forEach(user => {
-      // Compare with phone number from localStorage
-      if (user.phone_number !== currentUserPhone) {
-        this.service.getUserProfilebyId(user.user_id.toString()).subscribe((profile: any) => {
-          const receiverId = profile.phone_number;
+    this.service.getAllUsers().subscribe((users: any[]) => {
+      users.forEach(user => {
+        // Compare with phone number from localStorage
+        if (user.phone_number !== currentUserPhone) {
+          this.service.getUserProfilebyId(user.user_id.toString()).subscribe((profile: any) => {
+            const receiverId = profile.phone_number;
 
-          // Add to chatList with receiver_Id
-          this.chatList.push({
-            ...user,
-            receiver_Id: receiverId
+            // Add to chatList with receiver_Id
+            this.chatList.push({
+              ...user,
+              receiver_Id: receiverId
+            });
           });
-        });
-      }
+        }
+      });
     });
-  });
-}
+  }
 
 
 
-// getAllUsers() {
-//     this.service.getAllUsers().subscribe((users: any[]) => {
-//       const currentUser = this.currUserId?.toString();
-//       this.chatList = users.filter(u => u.phone_number !== currentUser);
-//     });
-//   }
+  // getAllUsers() {
+  //     this.service.getAllUsers().subscribe((users: any[]) => {
+  //       const currentUser = this.currUserId?.toString();
+  //       this.chatList = users.filter(u => u.phone_number !== currentUser);
+  //     });
+  //   }
 
   get filteredChats() {
     let filtered = this.chatList;
@@ -789,17 +796,17 @@ export class HomeScreenPage implements OnInit, OnDestroy {
 
 
   openChat(chat: any) {
-  let rawPhone = chat.receiverId || chat.receiver_Id;
+    let rawPhone = chat.receiverId || chat.receiver_Id;
 
-  // Remove "+91" or any non-digit characters and take last 10 digits
-  const cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
+    // Remove "+91" or any non-digit characters and take last 10 digits
+    const cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
 
-  console.log("Cleaned receiverId:", cleanPhone);
+    console.log("Cleaned receiverId:", cleanPhone);
 
-  this.router.navigate(['/chatting-screen'], {
-    queryParams: { receiverId: cleanPhone }
-  });
-}
+    this.router.navigate(['/chatting-screen'], {
+      queryParams: { receiverId: cleanPhone }
+    });
+  }
 
   async presentPopover(ev: any) {
     const popover = await this.popoverCtrl.create({
