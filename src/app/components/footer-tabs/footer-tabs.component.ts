@@ -35,8 +35,8 @@ export class FooterTabsComponent {
   }
 
   navigateTomyscreen() {
-    this.router.navigate(['/setting-screen']);
-    this.activePath = '/setting-screen';
+    this.router.navigate(['/community-screen']);
+    this.activePath = '/community-screen';
   }
 
   navigateTocallsscreen() {

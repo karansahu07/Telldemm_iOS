@@ -13,7 +13,7 @@ ion-toolbar {
 }
 
 .telldemm {
-    padding-top: 30px;
+    padding-top: env(safe-area-inset-top);
 }
 
 ion-title {

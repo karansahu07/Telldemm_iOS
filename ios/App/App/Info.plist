@@ -52,5 +52,8 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to your photo library to choose photos or videos for your messages or profile.</string>
 
+	<key>UIKeyboardDisplayRequiresUserAction</key>
+<false/>
+
 </dict>
 </plist>

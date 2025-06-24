@@ -220,7 +220,8 @@ ion-toolbar {
   --background: white;
   width: 100%;
   height: 100%;
-  --padding-top: 30px;
+  // --padding-top: 30px;
+  padding-top: env(safe-area-inset-top);
 }
 
 /* ===== Theme Colors ===== */

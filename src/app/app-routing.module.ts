@@ -135,6 +135,11 @@ const routes: Routes = [
     path: 'contact-screen',
     // canActivate: [AuthGuard],  // check something
     loadComponent: () => import('./contact-screen/contacts.page').then(m => m.ContactsPage)
+  },
+  {
+    path: 'community-screen',
+    canActivate: [AuthGuard],
+    loadComponent: () => import('./community-screen/community.page').then(m => m.CommunityPage)
   }
 ];
 

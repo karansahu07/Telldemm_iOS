@@ -1,12 +1,23 @@
 <ion-header [translucent]="true">
-  <ion-toolbar style="display: flex; flex-direction: column; align-items: stretch; --background: white;">
+  <ion-toolbar style="display: flex; flex-direction: column; --background: white;">
 
-    <div style="display: flex;padding-top: 30px;">
+    <ion-buttons slot="start" style="color: black; width: 8%;">
+      <!-- <ion-back-button defaultHref="/home-screen"></ion-back-button> -->
+       <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/home-screen"
+        text=""
+        color="dark">  <!-- this makes the arrow black -->
+      </ion-back-button>
+    </ion-buttons>
+
+    </ion-buttons>
+    <div style="display: flex;">
       <ion-title>
-        <h2 style="color:#FF1414;font-family: Montserrat-bold;font-size:20px">Calls</h2>
+        <h2 style="font-family: Montserrat-bold;font-size:20px">Settings</h2>
       </ion-title>
 
-      <ion-buttons slot="end" style="display: flex;margin-right: 10px;">
+      <!-- <ion-buttons slot="end" style="display: flex;margin-right: 10px;">
         <ion-button fill="clear">
           <img src="assets/images/qr-code.svg" style="width: 24px; height: 24px;" />
         </ion-button>
@@ -16,7 +27,7 @@
         <ion-button fill="clear" (click)="presentPopover($event)">
           <img src="assets/images/dots (1).svg" style="width: 24px; height: 24px;" />
         </ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
     </div>
 
   </ion-toolbar>

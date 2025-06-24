@@ -80,3 +80,9 @@
         url('./assets/fonts/OpenSans-SemiBold.ttf') format('ttf'),
         url('./assets/fonts/OpenSans-SemiBold.otf') format('otf');
 }
+
+
+
+body.ios .footer-fixed {
+  padding-bottom: env(safe-area-inset-bottom); // for iPhones with notch
+}

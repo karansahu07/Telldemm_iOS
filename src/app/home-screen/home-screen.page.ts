@@ -635,6 +635,233 @@
 
 
 
+// import { CommonModule } from '@angular/common';
+// import { Component, OnInit, OnDestroy } from '@angular/core';
+// import { IonicModule, PopoverController } from '@ionic/angular';
+// import { FooterTabsComponent } from "../components/footer-tabs/footer-tabs.component";
+// import { Router } from '@angular/router';
+// import { MenuPopoverComponent } from '../components/menu-popover/menu-popover.component';
+// import { FormsModule } from '@angular/forms';
+// import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+// import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+// import { ApiService } from '../services/api/api.service';
+// import { Platform } from '@ionic/angular';
+
+// @Component({
+//   selector: 'app-home-screen',
+//   templateUrl: './home-screen.page.html',
+//   styleUrls: ['./home-screen.page.scss'],
+//   standalone: true,
+//   imports: [IonicModule, CommonModule, FooterTabsComponent, FormsModule]
+// })
+// export class HomeScreenPage implements OnInit, OnDestroy {
+
+//   constructor(
+//     private router: Router,
+//     private popoverCtrl: PopoverController,
+//     private service: ApiService,
+//     private platform: Platform
+//   ) { }
+
+//   searchText: string = '';
+//   selectedFilter: string = 'all';
+//   currUserId: string | null = localStorage.getItem("phone_number");
+//   scannedText: string = '';
+//   capturedImage: string = '';
+
+//   chatList: any[] = [];
+//   galleryImages: string[] = [];
+
+//   ngOnInit() {
+//     // this.fetchAllUsers();
+//     this.getAllUsers();
+
+//     if (this.platform.is('ios')) {
+//       document.body.classList.add('is-ios');
+//     }
+
+//   }
+
+//   ngOnDestroy(): void {
+//     // Nothing to clean up in this version
+//   }
+
+//   // fetchAllUsers() {
+//   //   const allUsers = [
+//   //     {
+//   //       name: 'Karan',
+//   //       receiver_Id: '9138152160',
+//   //       phone_number: '+919138152160',
+//   //       message: 'Hello',
+//   //       messageStatus: 'sent',
+//   //       unread: false,
+//   //       time: '10:00 AM',
+//   //       unreadCount: 0,
+//   //       group: false
+//   //     },
+//   //     {
+//   //       name: 'Khushboo',
+//   //       receiver_Id: '7700075618',
+//   //       phone_number: '+917700075618',
+//   //       message: 'How are you?',
+//   //       messageStatus: 'received',
+//   //       unread: true,
+//   //       time: '11:00 AM',
+//   //       unreadCount: 2,
+//   //       group: false
+//   //     },
+//   //     {
+//   //       name: 'khushi',
+//   //       receiver_Id: '7700075619',
+//   //       phone_number: '+917700075619',
+//   //       message: '?',
+//   //       messageStatus: 'received',
+//   //       unread: true,
+//   //       time: '1:00 AM',
+//   //       unreadCount: 2,
+//   //       group: false
+//   //     }
+//   //   ];
+
+//   //   const currentUser = this.currUserId?.toString();
+//   //   this.chatList = allUsers.filter(u => u.phone_number !== currentUser);
+//   // }
+
+//   getAllUsers() {
+//     const currentUserPhone = localStorage.getItem('phone_number'); // e.g. "+919138152160"
+
+//     this.service.getAllUsers().subscribe((users: any[]) => {
+//       users.forEach(user => {
+//         // Compare with phone number from localStorage
+//         if (user.phone_number !== currentUserPhone) {
+//           this.service.getUserProfilebyId(user.user_id.toString()).subscribe((profile: any) => {
+//             const receiverId = profile.phone_number;
+
+//             // Add to chatList with receiver_Id
+//             this.chatList.push({
+//               ...user,
+//               receiver_Id: receiverId
+//             });
+//           });
+//         }
+//       });
+//     });
+//   }
+
+
+
+//   // getAllUsers() {
+//   //     this.service.getAllUsers().subscribe((users: any[]) => {
+//   //       const currentUser = this.currUserId?.toString();
+//   //       this.chatList = users.filter(u => u.phone_number !== currentUser);
+//   //     });
+//   //   }
+
+//   get filteredChats() {
+//     let filtered = this.chatList;
+
+//     if (this.selectedFilter === 'read') {
+//       filtered = filtered.filter(chat => !chat.unread);
+//     } else if (this.selectedFilter === 'unread') {
+//       filtered = filtered.filter(chat => chat.unread);
+//     } else if (this.selectedFilter === 'groups') {
+//       filtered = filtered.filter(chat => chat.group);
+//     }
+
+//     if (this.searchText.trim() !== '') {
+//       const searchLower = this.searchText.toLowerCase();
+//       filtered = filtered.filter(chat =>
+//         chat.name.toLowerCase().includes(searchLower) ||
+//         chat.message.toLowerCase().includes(searchLower)
+//       );
+//     }
+
+//     return filtered;
+//   }
+
+//   get totalUnreadCount(): number {
+//     return this.chatList.reduce((sum, chat) => sum + (chat.unreadCount || 0), 0);
+//   }
+
+//   setFilter(filter: string) {
+//     this.selectedFilter = filter;
+//   }
+
+//   // openChat(chat: any) {
+//   //   console.log("receiver_id",chat.receiver_Id);
+//   //   this.router.navigate(['/chatting-screen'], {
+//   //     queryParams: { receiverId: chat.receiver_Id }
+//   //   });
+//   // }
+
+
+//   openChat(chat: any) {
+//     let rawPhone = chat.receiverId || chat.receiver_Id;
+
+//     // Remove "+91" or any non-digit characters and take last 10 digits
+//     const cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
+
+//     console.log("Cleaned receiverId:", cleanPhone);
+
+//     this.router.navigate(['/chatting-screen'], {
+//       queryParams: { receiverId: cleanPhone }
+//     });
+//   }
+
+//   async presentPopover(ev: any) {
+//     const popover = await this.popoverCtrl.create({
+//       component: MenuPopoverComponent,
+//       event: ev,
+//       translucent: true,
+//     });
+//     await popover.present();
+//   }
+
+//   goToContact() {
+//     this.router.navigate(['/contact-screen']);
+//   }
+
+//   async openCamera() {
+//     try {
+//       const image = await Camera.getPhoto({
+//         source: CameraSource.Camera,
+//         quality: 90,
+//         resultType: CameraResultType.Uri,
+//       });
+
+//       this.capturedImage = image.webPath!;
+//     } catch (error) {
+//       console.error('Camera error:', error);
+//     }
+//   }
+
+//   async scanBarcode() {
+//     const status = await BarcodeScanner.checkPermission({ force: true });
+
+//     if (!status.granted) {
+//       alert('Camera permission is required.');
+//       return;
+//     }
+
+//     await BarcodeScanner.hideBackground();
+//     document.body.classList.add('scanner-active');
+
+//     const result = await BarcodeScanner.startScan();
+
+//     if (result.hasContent) {
+//       alert(`Scanned: ${result.content}`);
+//     } else {
+//       alert('No barcode found.');
+//     }
+
+//     await BarcodeScanner.showBackground();
+//     document.body.classList.remove('scanner-active');
+//   }
+// }
+
+
+
+
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicModule, PopoverController } from '@ionic/angular';
@@ -673,71 +900,24 @@ export class HomeScreenPage implements OnInit, OnDestroy {
   galleryImages: string[] = [];
 
   ngOnInit() {
-    // this.fetchAllUsers();
     this.getAllUsers();
 
     if (this.platform.is('ios')) {
       document.body.classList.add('is-ios');
     }
-
   }
 
-  ngOnDestroy(): void {
-    // Nothing to clean up in this version
-  }
-
-  // fetchAllUsers() {
-  //   const allUsers = [
-  //     {
-  //       name: 'Karan',
-  //       receiver_Id: '9138152160',
-  //       phone_number: '+919138152160',
-  //       message: 'Hello',
-  //       messageStatus: 'sent',
-  //       unread: false,
-  //       time: '10:00 AM',
-  //       unreadCount: 0,
-  //       group: false
-  //     },
-  //     {
-  //       name: 'Khushboo',
-  //       receiver_Id: '7700075618',
-  //       phone_number: '+917700075618',
-  //       message: 'How are you?',
-  //       messageStatus: 'received',
-  //       unread: true,
-  //       time: '11:00 AM',
-  //       unreadCount: 2,
-  //       group: false
-  //     },
-  //     {
-  //       name: 'khushi',
-  //       receiver_Id: '7700075619',
-  //       phone_number: '+917700075619',
-  //       message: '?',
-  //       messageStatus: 'received',
-  //       unread: true,
-  //       time: '1:00 AM',
-  //       unreadCount: 2,
-  //       group: false
-  //     }
-  //   ];
-
-  //   const currentUser = this.currUserId?.toString();
-  //   this.chatList = allUsers.filter(u => u.phone_number !== currentUser);
-  // }
+  ngOnDestroy(): void {}
 
   getAllUsers() {
-    const currentUserPhone = localStorage.getItem('phone_number'); // e.g. "+919138152160"
+    const currentUserPhone = localStorage.getItem('phone_number');
 
     this.service.getAllUsers().subscribe((users: any[]) => {
       users.forEach(user => {
-        // Compare with phone number from localStorage
         if (user.phone_number !== currentUserPhone) {
           this.service.getUserProfilebyId(user.user_id.toString()).subscribe((profile: any) => {
             const receiverId = profile.phone_number;
 
-            // Add to chatList with receiver_Id
             this.chatList.push({
               ...user,
               receiver_Id: receiverId
@@ -747,15 +927,6 @@ export class HomeScreenPage implements OnInit, OnDestroy {
       });
     });
   }
-
-
-
-  // getAllUsers() {
-  //     this.service.getAllUsers().subscribe((users: any[]) => {
-  //       const currentUser = this.currUserId?.toString();
-  //       this.chatList = users.filter(u => u.phone_number !== currentUser);
-  //     });
-  //   }
 
   get filteredChats() {
     let filtered = this.chatList;
@@ -771,8 +942,8 @@ export class HomeScreenPage implements OnInit, OnDestroy {
     if (this.searchText.trim() !== '') {
       const searchLower = this.searchText.toLowerCase();
       filtered = filtered.filter(chat =>
-        chat.name.toLowerCase().includes(searchLower) ||
-        chat.message.toLowerCase().includes(searchLower)
+        chat.name?.toLowerCase().includes(searchLower) ||
+        chat.message?.toLowerCase().includes(searchLower)
       );
     }
 
@@ -787,22 +958,9 @@ export class HomeScreenPage implements OnInit, OnDestroy {
     this.selectedFilter = filter;
   }
 
-  // openChat(chat: any) {
-  //   console.log("receiver_id",chat.receiver_Id);
-  //   this.router.navigate(['/chatting-screen'], {
-  //     queryParams: { receiverId: chat.receiver_Id }
-  //   });
-  // }
-
-
   openChat(chat: any) {
     let rawPhone = chat.receiverId || chat.receiver_Id;
-
-    // Remove "+91" or any non-digit characters and take last 10 digits
     const cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
-
-    console.log("Cleaned receiverId:", cleanPhone);
-
     this.router.navigate(['/chatting-screen'], {
       queryParams: { receiverId: cleanPhone }
     });

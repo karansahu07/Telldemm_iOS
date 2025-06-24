@@ -1,11 +1,15 @@
 <ion-header translucent="true">
   <!-- Full Toolbar shown only when search bar is not active -->
   <ion-toolbar *ngIf="!showSearchBar" class="toolbar_screen">
-    <ion-buttons class="back-btn" slot="start">
+    <ion-buttons slot="start">
       <ion-back-button
         defaultHref="/home-screen"
-        style="font-size: 20px"
-      ></ion-back-button>
+        text=""
+        color="dark"
+        style="
+          padding-top: 10px;
+        ">  
+      </ion-back-button>
     </ion-buttons>
 
     <ion-buttons>
@@ -16,7 +20,7 @@
           --padding-start: 0;
           --background: white;
           color: black;
-          margin-top: 15px;
+          padding-top: 20px;
           margin-left: 20px;
         "
       >
@@ -27,13 +31,14 @@
       </ion-item>
     </ion-buttons>
 
-    <ion-buttons class="btn-main-icon" slot="end">
+    <ion-buttons class="btn-main-icon" slot="end" style="padding-top: 20px;">
       <ion-button class="custom-search-icon" (click)="focusSearchBar()">
         <ion-icon slot="icon-only" name="search-outline"></ion-icon>
       </ion-button>
       <ion-button (click)="presentContactMenu($event)" class="all-icon-btn">
-        <ion-icon name="ellipsis-vertical" class="call-dout-icon"></ion-icon>
-      </ion-button>
+  <ion-icon name="ellipsis-vertical" class="call-dout-icon" color="dark"></ion-icon>
+</ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 
