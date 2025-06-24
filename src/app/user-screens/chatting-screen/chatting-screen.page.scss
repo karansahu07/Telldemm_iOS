@@ -308,6 +308,7 @@ ion-toolbar {
 
 .footer-fixed{
   bottom: 0px !important;
+  padding-bottom : 30px !important;
 }
 
 /* Keyboard active state */
@@ -329,7 +330,7 @@ ion-toolbar {
   align-items: center;
   background: #f1f1f1;
   border-radius: 20px;
-  padding: 6px 12px;
+  padding: 0px 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -429,3 +430,4 @@ ion-content.chat-background {
 .message-input::part(native) {
   text-align: center;
 }
+
