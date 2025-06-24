@@ -242,8 +242,7 @@ ion-toolbar {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  padding-bottom: 0px;
-  // padding-bottom: 100px; // Space for footer
+  padding-bottom: 100px; // Space for footer
   overflow-y: auto;
   min-height: 100%;
 }
