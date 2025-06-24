@@ -494,17 +494,14 @@
   </ion-row>
 </div> -->
 
-      <!-- <ion-back-button defaultHref="/home-screen" style="color: black;"></ion-back-button> -->
+<!-- <ion-back-button defaultHref="/home-screen" style="color: black;"></ion-back-button> -->
 
-      <ion-header [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar style="--background: white;">
-    
+
     <!-- Back arrow only -->
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/home-screen"
-        text=""
-        color="dark">  <!-- this makes the arrow black -->
+      <ion-back-button defaultHref="/home-screen" text="" color="dark"> <!-- this makes the arrow black -->
       </ion-back-button>
     </ion-buttons>
 
@@ -522,7 +519,7 @@
 
     <!-- Right icons -->
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="dark">  <!-- Use color="dark" -->
+      <ion-button fill="clear" color="dark"> <!-- Use color="dark" -->
         <ion-icon name="videocam-outline" style="font-size: 24px;"></ion-icon>
       </ion-button>
       <ion-button fill="clear" color="dark" (click)="goToCallingScreen()">
@@ -541,7 +538,7 @@
 
 
 <ion-content class="chat-background" [fullscreen]="true" [scrollEvents]="true">
-  <div #scrollContainer class="chat-messages" style="padding: 0 10px 80px 10px; overflow-y: auto; min-height: 100%;">
+  <div #scrollContainer class="chat-messages">
     <ion-spinner name="dots" *ngIf="isLoadingMore" style="margin: 8px auto; display: block;"></ion-spinner>
     <div *ngFor="let msg of messages"
       [ngClass]="{ 'align-end': msg.sender_id === senderId, 'align-start': msg.sender_id !== senderId }"
@@ -549,13 +546,13 @@
 
       <div class="message-bubble" [ngClass]="msg.sender_id === senderId ? 'sender-message' : 'receiver-message'">
         <p class="message-text">{{ msg.text }}</p>
-        <!-- <p class="time-stamp" style="font-size: 10px; color: gray; text-align: right;">
+        <!-- <p class="time-stamp" style="font-size: 10px; color: gray;   text-align: right;">
           {{ msg.timestamp }}
         </p> -->
 
         <p class="time-stamp" style="font-size: 10px; color: gray; text-align: right;">
-  {{ msg.timestamp.split(', ')[1] }}
-</p>
+          {{ msg.timestamp.split(', ')[1] }}
+        </p>
 
       </div>
     </div>

@@ -242,7 +242,8 @@ ion-toolbar {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  padding-bottom: 100px; // Space for footer
+  padding-bottom: 0px;
+  // padding-bottom: 100px; // Space for footer
   overflow-y: auto;
   min-height: 100%;
 }
@@ -304,6 +305,10 @@ ion-toolbar {
   // box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
   z-index: 999;
   // transition: bottom 0.3s ease-in-out; /* Smooth animation */
+}
+
+.footer-fixed{
+  bottom: 0px !important;
 }
 
 /* Keyboard active state */
