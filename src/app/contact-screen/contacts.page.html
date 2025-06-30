@@ -119,13 +119,14 @@
 
 
 <ion-header translucent="true">
+  <!-- Toolbar shown only when search bar is not active -->
   <ion-toolbar *ngIf="!showSearchBar" class="toolbar_screen">
-    <ion-buttons class="back-btn" slot="start">
-      <ion-back-button defaultHref="/home-screen" style="font-size: 20px"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home-screen" text="" color="dark" style="padding-top: 10px;"></ion-back-button>
     </ion-buttons>
 
     <ion-buttons>
-      <ion-item lines="none" detail="false" style="--padding-start: 0; --background: white; color: black; margin-top: 15px; margin-left: 20px;">
+      <ion-item lines="none" detail="false" style="--padding-start: 0; --background: white; color: black; padding-top: 20px; margin-left: 20px;">
         <ion-label class="user-name">
           <h2 class="user-real-name">Select contacts</h2>
           <h5>{{ allUsers.length }} contacts</h5>
@@ -133,16 +134,17 @@
       </ion-item>
     </ion-buttons>
 
-    <ion-buttons class="btn-main-icon" slot="end">
+    <ion-buttons class="btn-main-icon" slot="end" style="padding-top: 20px;">
       <ion-button class="custom-search-icon" (click)="focusSearchBar()">
         <ion-icon slot="icon-only" name="search-outline"></ion-icon>
       </ion-button>
       <ion-button (click)="presentContactMenu($event)" class="all-icon-btn">
-        <ion-icon name="ellipsis-vertical" class="call-dout-icon"></ion-icon>
+        <ion-icon name="ellipsis-vertical" class="call-dout-icon" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
+  <!-- Search Toolbar -->
   <ion-toolbar *ngIf="showSearchBar" class="custom-search-toolbar">
     <div class="custom-search-container">
       <ion-icon name="arrow-back-outline" class="search-back-icon" (click)="toggleSearch()"></ion-icon>
@@ -164,7 +166,6 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list class="list" lines="none">
     <ion-item class="items" (click)="startGroupCreation()">
       <ion-avatar slot="start" class="green-icon">
@@ -178,7 +179,7 @@
         <ion-icon name="person-add-outline"></ion-icon>
       </ion-avatar>
       <ion-label class="group">New contact</ion-label>
-      <ion-icon style="color: black" name="qr-code-outline" slot="end"></ion-icon>
+      <ion-icon name="qr-code-outline" slot="end" style="color: black"></ion-icon>
     </ion-item>
 
     <ion-item class="items">
@@ -196,19 +197,19 @@
     </ion-item>
   </ion-list>
 
-  <div *ngIf="creatingGroup" class="group-creator" style="padding: 12px">
+  <!-- Group Creation Section -->
+  <div *ngIf="creatingGroup" class="group-creator" style="padding: 12px;">
     <ion-input [(ngModel)]="newGroupName" placeholder="Enter Group Name" style="margin-bottom: 12px"></ion-input>
-
     <ion-list>
       <ion-item *ngFor="let user of allUsers">
         <ion-label>{{ user.name }}</ion-label>
         <ion-checkbox [(ngModel)]="user.selected" slot="end"></ion-checkbox>
       </ion-item>
     </ion-list>
-
     <ion-button expand="full" color="primary" (click)="createGroup()">Create Group</ion-button>
   </div>
 
+  <!-- Contact List -->
   <ion-list-header *ngIf="!creatingGroup">
     <ion-label>Contacts on Telldemm</ion-label>
   </ion-list-header>

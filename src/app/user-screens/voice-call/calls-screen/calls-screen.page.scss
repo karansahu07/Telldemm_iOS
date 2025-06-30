@@ -1,14 +1,18 @@
 ion-toolbar {
     display: flex;
     flex-direction: column;
-    // align-items: stretch;
+    align-items: stretch;
     --background: white;
-    padding-top: 30px;
+    padding-top: env(safe-area-inset-top);
 }
 
 ion-title {
     margin: 0;
 }
+
+// h2.toolbar-title.sc-ion-buttons-md {
+//     color: #ff1414;
+// }
 
 ion-button img {
     width: 24px;
@@ -19,7 +23,7 @@ ion-button img {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 8px 0;
+    // padding: 8px 0;
 }
 
 .container {

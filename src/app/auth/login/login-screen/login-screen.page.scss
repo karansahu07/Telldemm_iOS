@@ -174,16 +174,19 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .otp-input input {
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    outline: none;
-    border: 1px solid black;
-    color: black;
-    font-size: 30px;
-    text-align: center;
-    border-radius: 5px;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  outline: none;
+  border: 1px solid black;
+  color: black;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 5px;
+  line-height: 1;
+  padding: 0;
 }
+
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

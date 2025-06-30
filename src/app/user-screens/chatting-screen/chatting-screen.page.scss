@@ -1,3 +1,221 @@
+// ion-toolbar {
+//     --background: white;
+//     width: 100%;
+//     height: 100%;
+//     --padding-top: 30px;
+// }
+
+// .ion-color-danger {
+//     --ion-color-base: #FF1414;
+// }
+
+// .chat-background {
+//     --background: url('/assets/images/chatbackground.svg');
+//     background-size: cover;
+//     background-position: center;
+//     background-repeat: no-repeat;
+// }
+
+
+// // .input-bar {
+// //   position: fixed;
+// //   bottom: 10px;
+// //   width: 90%;
+// //   left: 5%;
+// //   background: black;
+// //   border-radius: 25px;
+// //   padding: 5px 10px;
+// //   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+// //   display: flex;
+// //   align-items: center;
+// // }
+
+// // .message-bubble {
+// //   max-width: 70%;
+// //   padding: 10px 15px;
+// //   margin: 5px;
+// //   border-radius: 15px;
+// //   font-size: 14px;
+// //   color: black; /* <-- Makes the text black */
+// //   word-wrap: break-word;
+// // }
+
+// // .message-bubble.sent {
+// //   background-color: #dcf8c6; /* Light green for sent */
+// //   align-self: flex-end;
+// // }
+
+// // .message-bubble.received {
+// //   background-color: #f1f0f0; /* Light gray for received */
+// //   align-self: flex-start;
+// // }
+
+// // .time-stamp {
+// //   font-size: 10px;
+// //   color: #666;
+// //   margin-top: 5px;
+// //   text-align: right;
+// // }
+
+
+// /* Alignment for sender and receiver */
+// .align-end {
+//   align-items: flex-end;
+// }
+
+// .align-start {
+//   align-items: flex-start;
+// }
+
+// /* Message bubble */
+// // .sender-message .message-bubble {
+// //   background: #FFD4D4;
+// //   align-self: flex-end;
+// // }
+
+// // .receiver-message .message-bubble {
+// //   background: #FFFFFF;
+// //   align-self: flex-start;
+// // }
+
+// // .message-bubble {
+// //   display: flex;
+// //   flex-direction: column;
+// //   width: fit-content;
+// //   max-width: 75%;
+// //   border-radius: 20px;
+// //   padding: 5px 15px;
+// //   gap: 10px;
+// //   margin-bottom: 10px;
+// // }
+
+// // .message-text {
+// //   color: #000;
+// //   font-size: 16px;
+// //   margin: 0;
+// //   font-family: Montserrat-SemiBold;
+// // }
+
+// // .time-stamp {
+// //   font-size: 13px;
+// //   color: #444;
+// //   margin: 0 0 2px 0;
+// //   white-space: nowrap;
+// // }
+
+// // ion-content.chat-background {
+// //   // --background: #f4f4f4;
+// //   padding: 10px;
+// //   overflow-y: auto; // optional if needed
+// // }
+
+// .chat-messages {
+//   display: flex;
+//   flex-direction: column;
+//   padding: 10px;
+//   padding-bottom: 100px;
+//   overflow-y: auto;
+//   min-height: 100%;
+// }
+
+// .footer {
+//   position: fixed;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   padding: 10px;
+//   background: #f4f4f4;
+//   z-index: 10;
+// }
+
+// .input-bar {
+//   position: fixed;
+//   bottom: 10px;
+//   width: 90%;
+//   left: 5%;
+//   background: black;
+//   border-radius: 25px;
+//   padding: 5px 10px;
+//   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+//   display: flex;
+//   align-items: center;
+//   z-index: 11; /* Ensure input bar is above other elements */
+// }
+
+// ion-content.chat-background {
+//  // --padding-bottom: 100px; /* Match or exceed footer height */
+//   overflow-y: auto;
+// }
+
+// // .chat-background {
+// //   --background: #f4f4f4;
+// // }
+
+// .chat-messages {
+//   display: flex;
+//   flex-direction: column;
+//   padding: 10px;
+//   padding-bottom: 90px; // Add padding to avoid footer overlap
+//   // height: 100%;
+//   // overflow-y: auto;
+// }
+
+// .message-bubble {
+//   display: flex;
+//   flex-direction: column;
+//   width: fit-content;
+//   max-width: 75%;
+//   border-radius: 20px;
+//   padding: 5px 15px;
+//   gap: 10px;
+//   margin-bottom: 10px;
+// }
+
+// .sender-message {
+//   background: #FFD4D4;
+//   align-self: flex-end;
+// }
+
+// .receiver-message {
+//   background: #FFFFFF;
+//   align-self: flex-start;
+// }
+
+// .message-text {
+//   color: #000;
+//   font-size: 16px;
+//   margin: 0;
+//   font-family: Montserrat-SemiBold;
+// }
+
+// .time-stamp {
+//   font-size: 13px;
+//   color: #444;
+//   margin: 0 0 2px 0;
+//   white-space: nowrap;
+// }
+
+// .send-btn {
+//   --color: #FF1414 !important;
+//   --ion-color-primary: #FF1414 !important;
+
+//   ion-icon {
+//     color: #FF1414 !important;
+//   }
+// }
+
+
+// // ion-content.chat-background {
+// //   --padding-bottom: 80px; 
+// // }
+
+// // ion-content {
+// //   --keyboard-offset: 0px;
+// // }
+
+
+
+/* ===== Toolbar ===== */
 ion-toolbar {
   --background: white;
   width: 100%;
@@ -78,8 +296,7 @@ ion-toolbar {
 /* ===== Fixed Footer Input Bar (like WhatsApp) ===== */
 .footer-fixed {
   position: fixed;
-  // bottom: 0;
-  bottom: 0px !important;
+  bottom: 0;
   left: 0;
   right: 0;
   background: #ffffff;
@@ -87,6 +304,11 @@ ion-toolbar {
   // box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
   z-index: 999;
   // transition: bottom 0.3s ease-in-out; /* Smooth animation */
+}
+
+.footer-fixed{
+  bottom: 0px !important;
+  padding-bottom : 30px !important;
 }
 
 /* Keyboard active state */
@@ -108,7 +330,7 @@ ion-toolbar {
   align-items: center;
   background: #f1f1f1;
   border-radius: 20px;
-  padding: 6px 12px;
+  padding: 0px 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -126,7 +348,7 @@ ion-toolbar {
   resize: none;
   overflow: hidden;
   min-height: 25px;
-  max-height: 100px;
+  max-height: 100px; /* Limit textarea height */
 }
 
 .icon-left {

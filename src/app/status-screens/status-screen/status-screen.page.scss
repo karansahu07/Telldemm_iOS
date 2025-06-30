@@ -5,17 +5,19 @@ ion-content {
 .telldemm {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  // align-items: stretch;
   --background: white;
+  padding-top: env(safe-area-inset-top);
 }
 
 .main-header {
   display: flex;
-  padding-top: 30px;
+  // padding-top: 15px;
+  justify-content:space-between;
 }
 
 .header-name {
-  // color: #ff1414;
+  color: #ff1414;
   font-family: Montserrat-bold;
   font-size: 20px;
 }
@@ -237,4 +239,12 @@ swiper-container {
 
 .slider-swip {
   min-width: 75px;
+}
+
+.ios .tellimg {
+    padding-left: 23px !important;
+}
+
+.is-ios .tellimg img {
+    display: block;
 }

@@ -1,8 +1,25 @@
+// .tooler {
+//   padding-top: 30px !important;
+//   font-family: Montserrat-bold !important;
+//   box-shadow: none;
+//   display: flex;
+//   // padding-top: 15px;
+//   justify-content:space-between;
+// }
 .tooler {
-  padding-top: 30px;
+  padding-top: env(safe-area-inset-top);
   font-family: Montserrat-bold !important;
   box-shadow: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
 }
+
+// .main-header {
+//   display: flex;
+//   padding-top: 15px;
+//   justify-content:space-between;
+// }
 .info-banner {
   display: flex;
   align-items: flex-start;

@@ -574,30 +574,31 @@
 
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start" style="color: black; width: 8%; margin-top: 15px;">
-      <ion-back-button defaultHref="/home-screen"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home-screen" text="" color="dark"> <!-- this makes the arrow black -->
+      </ion-back-button>
     </ion-buttons>
 
     <ion-buttons>
-      <ion-item lines="none" style="--padding-start: 0; --background: white; color: black; margin-top: 15px;" detail="false">
+      <ion-item lines="none" detail="false" style="--padding-start: 0; --background: transparent;">
         <ion-avatar slot="start">
           <img src="assets/images/user.jfif" alt="User Avatar" onError="this.src='assets/images/default-avatar.png'" />
         </ion-avatar>
-        <ion-label style="width: auto; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-            <h2 style="margin: 0; font-size: 16px;">{{ chatType === 'group' ? groupName : receiver_phone }}</h2>
+        <ion-label class="ion-text-nowrap" style="margin-left: 8px;">
+          <h2 style="margin: 0; font-size: 16px;">{{ chatType === 'group' ? groupName : receiver_phone }}</h2>
         </ion-label>
       </ion-item>
     </ion-buttons>
 
-    <ion-buttons slot="end" style="margin-top: 15px;">
-      <ion-button style="color: black;">
-        <ion-icon name="videocam-outline" style="font-size: 35px;"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="dark"> <!-- Use color="dark" -->
+        <ion-icon name="videocam-outline" style="font-size: 24px;"></ion-icon>
       </ion-button>
-      <ion-button (click)="goToCallingScreen()" style="color: black;">
-        <ion-icon name="call-outline" style="font-size: 28px;"></ion-icon>
+      <ion-button fill="clear" color="dark" (click)="goToCallingScreen()">
+        <ion-icon name="call-outline" style="font-size: 24px;"></ion-icon>
       </ion-button>
-      <ion-button style="color: black;">
-        <ion-icon name="ellipsis-vertical-outline" style="font-size: 28px;"></ion-icon>
+      <ion-button fill="clear" color="dark">
+        <ion-icon name="ellipsis-vertical-outline" style="font-size: 22px;"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

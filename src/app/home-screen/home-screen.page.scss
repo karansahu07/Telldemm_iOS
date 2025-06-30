@@ -13,10 +13,8 @@ ion-toolbar {
 }
 
 .telldemm {
-    padding-top: 30px;
-    // padding-top: env(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
 }
-
 
 ion-title {
     color: red;
@@ -208,21 +206,21 @@ ion-fab {
 //cxvgfb
 
 .gallery-scroll {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  padding: 10px 0;
-  gap: 10px;
-  background: #f8f8f8;
-  position: relative;
-  z-index: 1;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 10px 0;
+    gap: 10px;
+    background: #f8f8f8;
+    position: relative;
+    z-index: 1;
 }
 
 .thumb {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 
@@ -230,23 +228,17 @@ ion-fab {
 //fgdfghf d
 
 .scanner-active {
-  background: transparent !important;
+    background: transparent !important;
 }
 
-
-
-.unread-badge {
-  font-size: 12px;
-  min-width: 20px;
-  height: 20px;
-  text-align: center;
-  padding: 0 6px;
-  border-radius: 12px;
+.ios .telldemm {
+    padding-top: 50px;
 }
 
-.tick-icon,
-.tick-seen {
-  width: 14px;
-  margin-right: 4px;
-  vertical-align: middle;
+.ios .tellimg {
+    padding-left: 23px !important;
+}
+
+.is-ios .tellimg img {
+    display: block;
 }
