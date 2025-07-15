@@ -1,232 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { Database, ref, push, onValue } from '@angular/fire/database';
-// import { Observable } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class FirebaseChatService {
-//   constructor(private db: Database) {}
-
-//   // Send message
-//   sendMessage(roomId: string, message: any) {
-//     const messagesRef = ref(this.db, `chats/${roomId}`);
-//     return push(messagesRef, message);
-//   }
-
-//   // Listen for new messages
-//   listenForMessages(roomId: string): Observable<any[]> {
-//     return new Observable((observer) => {
-//       const messagesRef = ref(this.db, `chats/${roomId}`);
-//       onValue(messagesRef, (snapshot) => {
-//         const data = snapshot.val();
-//         const messages = data ? Object.entries(data).map(([key, val]) => ({ key, ...(val as any) })) : [];
-//         observer.next(messages);
-//       });
-//     });
-//   }
-//}
-
-
-
-// import { Injectable } from '@angular/core';
-// import {
-//   Database,
-//   ref,
-//   push,
-//   onValue,
-//   set,
-//   get,
-//   child
-// } from '@angular/fire/database';
-// import { Observable } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class FirebaseChatService {
-//   constructor(private db: Database) {}
-
-//   /** 🔹 Send message to a chat room (group or 1:1) */
-//   sendMessage(roomId: string, message: any) {
-//     const messagesRef = ref(this.db, `chats/${roomId}`);
-//     return push(messagesRef, message);
-//   }
-
-//   /** 🔹 Listen to all messages in a room (group or 1:1) */
-//   listenForMessages(roomId: string): Observable<any[]> {
-//     return new Observable((observer) => {
-//       const messagesRef = ref(this.db, `chats/${roomId}`);
-//       onValue(messagesRef, (snapshot) => {
-//         const data = snapshot.val();
-//         const messages = data
-//           ? Object.entries(data).map(([key, val]) => ({
-//               key,
-//               ...(val as any)
-//             }))
-//           : [];
-//         observer.next(messages);
-//       });
-//     });
-//   }
-
-//   /** ✅ Create a new group */
-//   async createGroup(groupId: string, groupName: string, members: string[]): Promise<void> {
-//     const groupRef = ref(this.db, `groups/${groupId}`);
-//     const memberMap = members.reduce((acc, id) => {
-//       acc[id] = true;
-//       return acc;
-//     }, {} as Record<string, boolean>);
-
-//     await set(groupRef, {
-//       name: groupName,
-//       members: memberMap
-//     });
-//   }
-
-//   /** 🔍 Get group metadata */
-//   async getGroupInfo(groupId: string): Promise<any> {
-//     const snapshot = await get(child(ref(this.db), `groups/${groupId}`));
-//     return snapshot.exists() ? snapshot.val() : null;
-//   }
-
-//   /** 🔍 Get all groups user belongs to */
-//   async getGroupsForUser(userId: string): Promise<string[]> {
-//     const snapshot = await get(child(ref(this.db), 'groups'));
-//     const allGroups = snapshot.val();
-//     const userGroups: string[] = [];
-
-//     if (allGroups) {
-//       Object.entries(allGroups).forEach(([groupId, groupData]: any) => {
-//         if (groupData.members?.[userId]) {
-//           userGroups.push(groupId);
-//         }
-//       });
-//     }
-
-//     return userGroups;
-//   }
-
-  
-// }
-
-
-
-// import { Injectable } from '@angular/core';
-// import {
-//   Database,
-//   ref,
-//   push,
-//   onValue,
-//   set,
-//   get,
-//   child,
-//   runTransaction
-// } from '@angular/fire/database';
-// import { Observable } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class FirebaseChatService {
-//   constructor(private db: Database) {}
-
-//   /** 🔹 Send message to a chat room (group or 1:1) */
-//   sendMessage(roomId: string, message: any) {
-//     const messagesRef = ref(this.db, `chats/${roomId}/messages`);
-//     return push(messagesRef, message);
-//   }
-
-//   /** 🔹 Listen to all messages in a room (group or 1:1) */
-//   listenForMessages(roomId: string): Observable<any[]> {
-//     return new Observable((observer) => {
-//       const messagesRef = ref(this.db, `chats/${roomId}/messages`);
-//       onValue(messagesRef, (snapshot) => {
-//         const data = snapshot.val();
-//         const messages = data
-//           ? Object.entries(data).map(([key, val]) => ({
-//               key,
-//               ...(val as any)
-//             }))
-//           : [];
-//         observer.next(messages);
-//       });
-//     });
-//   }
-
-//   /** ✅ Create a new group */
-//   async createGroup(groupId: string, groupName: string, members: string[]): Promise<void> {
-//     const groupRef = ref(this.db, `groups/${groupId}`);
-//     const memberMap = members.reduce((acc, id) => {
-//       acc[id] = true;
-//       return acc;
-//     }, {} as Record<string, boolean>);
-
-//     await set(groupRef, {
-//       name: groupName,
-//       members: memberMap
-//     });
-//   }
-
-//   /** 🔍 Get group metadata */
-//   async getGroupInfo(groupId: string): Promise<any> {
-//     const snapshot = await get(child(ref(this.db), `groups/${groupId}`));
-//     return snapshot.exists() ? snapshot.val() : null;
-//   }
-
-//   /** 🔍 Get all groups user belongs to */
-//   async getGroupsForUser(userId: string): Promise<string[]> {
-//     const snapshot = await get(child(ref(this.db), 'groups'));
-//     const allGroups = snapshot.val();
-//     const userGroups: string[] = [];
-
-//     if (allGroups) {
-//       Object.entries(allGroups).forEach(([groupId, groupData]: any) => {
-//         if (groupData.members?.[userId]) {
-//           userGroups.push(groupId);
-//         }
-//       });
-//     }
-
-//     return userGroups;
-//   }
-
-//   /** ✅ Generate consistent chat ID for 1:1 chat */
-//   generateChatId(user1: string, user2: string): string {
-//     return [user1, user2].sort().join('_');
-//   }
-
-//   /** ✅ Get unread count for a user in chat/group */
-//   getUnreadCount(roomId: string, userId: string): Promise<number> {
-//   return get(child(ref(this.db), `unreadCounts/${roomId}/${userId}`)).then(snapshot =>
-//     snapshot.exists() ? snapshot.val() : 0
-//   );
-// }
-
-// markAsRead(roomId: string, userId: string): Promise<void> {
-//   const countRef = ref(this.db, `unreadCounts/${roomId}/${userId}`);
-//   return set(countRef, 0);
-// }
-
-//   /** ✅ Increment unread count for a user */
-//   async incrementUnreadCount(roomId: string, userId: string): Promise<void> {
-//     const countRef = ref(this.db, `chats/${roomId}/unreadCounts/${userId}`);
-//     await runTransaction(countRef, (currentCount) => {
-//       return (currentCount || 0) + 1;
-//     });
-//   }
-
-//   /** ✅ Reset unread count to 0 when user views chat */
-//   async resetUnreadCount(roomId: string, userId: string): Promise<void> {
-//     const countRef = ref(this.db, `chats/${roomId}/unreadCounts/${userId}`);
-//     await set(countRef, 0);
-//   }
-// }
-
-
-
-
-
 import { Injectable } from '@angular/core';
 import {
   Database,
@@ -280,23 +51,39 @@ export class FirebaseChatService {
     });
   }
 
-  async createGroup(groupId: string, groupName: string, members: string[]): Promise<void> {
-    const groupRef = ref(this.db, `groups/${groupId}`);
-    const memberMap = members.reduce((acc, id) => {
-      acc[id] = true;
-      return acc;
-    }, {} as Record<string, boolean>);
+  async createGroup(groupId: string, groupName: string, members: any[]) {
+  const db = getDatabase();
+  const groupRef = ref(db, `groups/${groupId}`);
 
-    await set(groupRef, {
-      name: groupName,
-      members: memberMap
-    });
-  }
+  const groupData = {
+    name: groupName,
+    groupId,
+    members: members.reduce((acc, member) => {
+      acc[member.user_id] = {
+        name: member.name,
+        phone_number: member.phone_number
+      };
+      return acc;
+    }, {}),
+    createdAt: String(new Date()),
+  };
+
+  await set(groupRef, groupData);
+}
+
+
 
   async getGroupInfo(groupId: string): Promise<any> {
     const snapshot = await get(child(ref(this.db), `groups/${groupId}`));
     return snapshot.exists() ? snapshot.val() : null;
   }
+
+//   async getGroupInfo(groupId: string): Promise<any> {
+//   const groupRef = ref(this.db, `groups/${groupId}`);
+//   const snapshot = await get(groupRef);
+//   return snapshot.exists() ? snapshot.val() : null;
+// }
+
 
   async getGroupsForUser(userId: string): Promise<string[]> {
     const snapshot = await get(child(ref(this.db), 'groups'));
@@ -313,6 +100,23 @@ export class FirebaseChatService {
 
     return userGroups;
   }
+
+//   async getGroupsForUser(userId: string): Promise<string[]> {
+//   const snapshot = await get(child(ref(this.db), 'groups'));
+//   const allGroups = snapshot.val();
+//   const userGroups: string[] = [];
+
+//   if (allGroups) {
+//     Object.entries(allGroups).forEach(([groupId, groupData]: [string, any]) => {
+//       if (groupData.members?.[userId]) {
+//         userGroups.push(groupId);
+//       }
+//     });
+//   }
+
+//   return userGroups;
+// }
+
 
   incrementUnreadCount(roomId: string, receiverId: string) {
     const unreadRef = ref(this.db, `unreadCounts/${roomId}/${receiverId}`);
@@ -340,14 +144,16 @@ export class FirebaseChatService {
     return membersObj ? Object.keys(membersObj) : [];
   }
 
-//   markDelivered(roomId: string, messageId: string): void {
-//   const db = getDatabase();
-//   const messageRef = ref(db, `chats/${roomId}/${messageId}/status`);
+ // 👇 Call when message arrives on receiver's device
+  markDelivered(roomId: string, messageKey: string) {
+    const messageRef = ref(this.db, `chats/${roomId}/${messageKey}`);
+    // console.log("sdffsdd",messageRef);
+    update(messageRef, { delivered: true });
+  }
 
-//   update(messageRef, {
-//     delivered: true
-//   }).catch(error => {
-//     console.error("Failed to mark delivered:", error);
-//   });
-// }
+  // 👇 Call only when message is visibly seen
+  markRead(roomId: string, messageKey: string) {
+    const messageRef = ref(this.db, `chats/${roomId}/${messageKey}`);
+    update(messageRef, { read: true });
+  }
 }
